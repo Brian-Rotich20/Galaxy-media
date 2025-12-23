@@ -1,11 +1,20 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Image from "next/image";
+
+const logos = [
+  { src: "/logos/alumil.jpg", alt: "Alumil" },
+  { src: "/logos/intellisoft.png", alt: "Intellisoft" },
+  { src: "/logos/jacaranda-health-1.png", alt: "Jacaranda Health" },
+  { src: "/logos/mercy-corps-logo-1.png", alt: "Mercy Corps" },
+  { src: "/logos/kenyatta-university.jpg", alt: "Kenyatta University" },
+  { src: "/logos/Primerio.jpg", alt: "Primerio" },
+];
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger animations after component mounts
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
@@ -19,6 +28,9 @@ const Hero = () => {
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
+
+      {/* Gradient fade to black at bottom */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
       {/* Centered Content */}
       <div className="relative z-10 flex h-full w-full items-center justify-center">
@@ -34,36 +46,29 @@ const Hero = () => {
             </p>
           </div>
 
-            {/* Decorative Line - Bold */}
-            <div
+          {/* Decorative Line - Bold */}
+          <div
             className={`mb-8 flex items-center justify-center gap-4 transition-all duration-1000 ${
-                isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+              isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
             }`}
-            >
+          >
             <div className="h-1 w-16 bg-yellow-400" />
             <div className="h-1 w-16 bg-yellow-400" />
             <div className="h-1 w-16 bg-yellow-400" />
-            </div>
+          </div>
 
-
-                {/* Main Title with Staggered Animation */}
-            <div className="mb-8">
+          {/* Main Title with Staggered Animation */}
+          <div className="mb-8">
             <h1
-                className={`text-5xl md:text-7xl font-bold tracking-tight text-white transition-all duration-1000 ${
+              className={`text-5xl md:text-7xl font-bold tracking-tight text-white transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
+              }`}
             >
-                <span className="inline-block">Visual stories</span>{' '}
-                <span className="inline-block">
-                that move
-                </span>{' '}
-                <span className="inline-block">
-                brands
-                </span>
+              <span className="inline-block">Visual stories</span>{' '}
+              <span className="inline-block">that move</span>{' '}
+              <span className="inline-block">brands</span>
             </h1>
-            </div>
-
-
+          </div>
 
           {/* Services Description */}
           <div
@@ -79,7 +84,7 @@ const Hero = () => {
 
             {/* CTA Button */}
             <button
-              className={`px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-medium rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 ${
+              className={`px-8 py-3 bg-yellow-400 text-black font-medium rounded-full transition-all duration-300 hover:scale-105 ${
                 isVisible ? 'opacity-100' : 'opacity-0'
               }`}
             >
@@ -105,4 +110,13 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+
+// Combined export
+export default function HeroWithLogos() {
+  return (
+    <>
+      <Hero />
+      
+    </>
+  );
+}
